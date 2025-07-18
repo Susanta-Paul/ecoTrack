@@ -19,18 +19,23 @@ export interface Entry{
         },
         travel: {
             amount: number;
-            unit: "km" | "mi";
+            unit: "inr" | "usd";
         },
         food: {
             amount: number;
-            unit: "kg" | "g" | "INR" | "usd";
+            unit: "inr" | "usd";
         },
         misc: {
             amount: number;
-            unit: "INR" | "usd";
+            unit: "inr" | "usd";
         },
     };
-    totalCarbon: number;
+    totalCarbon: {
+      Electricity: number; 
+      Food: number;
+      Travel: number; 
+      Misc:  number;     
+    };
     month: string;          // "2025‑06"
     createdAt: Date;
 }
@@ -63,9 +68,11 @@ const entrySchema = new Schema({
   },
 
   totalCarbon: {
-    type: Number, // stored in kg CO2e
-    default: 0,
-  },
+      Electricity: {type: Number, required: false}, 
+      Food:{type: Number, required: false}, 
+      Travel: {type: Number, required: false}, 
+      Misc:  {type: Number, required: false},    
+    },
 
   month: {
     type: String,
