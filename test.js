@@ -69,7 +69,7 @@ import {ChatPromptTemplate} from "@langchain/core/prompts"
 //     const response= await axios.post("https://api.climatiq.io/data/v1/estimate/batch",
 //         data,
 //         {headers:{
-//             Authorization: `Bearer W7Z05FGE4N6HQ433X2YMDQV10G`
+//             Authorization: `Bearer 
 //         }}
 //     )
 //     if(response.status==200){
@@ -92,7 +92,7 @@ import {ChatPromptTemplate} from "@langchain/core/prompts"
 const llm= new ChatGroq({
         model: "llama-3.3-70b-versatile",
         temperature: 1,
-        apiKey: "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"
+        apiKey: ""
          
     })
 
