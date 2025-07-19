@@ -69,7 +69,7 @@ import {ChatPromptTemplate} from "@langchain/core/prompts"
 //     const response= await axios.post("https://api.climatiq.io/data/v1/estimate/batch",
 //         data,
 //         {headers:{
-//             Authorization: `Bearer 
+//             Authorization: `Bearer `
 //         }}
 //     )
 //     if(response.status==200){
