@@ -91,7 +91,7 @@ export default function page(){
                     </CardContent>
                     <CardFooter className="flex-col gap-2">
                         <p>Already have an account?</p>
-                        <Link href="/signin" className=""><Button variant="outline" >
+                        <Link href="/signin"><Button className="cursor-pointer" variant="outline" >
                             Login
                         </Button></Link>
                     </CardFooter>
