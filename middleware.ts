@@ -11,8 +11,8 @@ export default withAuth(
             authorized: ({req, token})=>{
                 const {pathname}= req.nextUrl
                 if(
-                    pathname==="signin" ||
-                    pathname=="signup" ||
+                    pathname==="/signin" ||
+                    pathname=="/signup" ||
                     pathname==="/"
                 ){
                     return true
@@ -28,6 +28,6 @@ export default withAuth(
 
 export const config={
     matcher: [
-        "/ ((?!_next/static|_next/image|favicon.ico|public/).*)"
+        "/((?!_next/static|_next/image|favicon.ico|public/).*)"
     ]
 }

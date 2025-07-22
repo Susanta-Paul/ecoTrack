@@ -6,30 +6,52 @@ import { useState } from "react";
 import {signIn} from "next-auth/react"
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import axios from "axios";
 
-export default function page(){
+export default function Page(){
 
     const [username, setUsername]=useState("")
     const [email, setEmail]=useState("")
     const [password, setPassword]=useState("")
     const [errorMsg, setErrorMsg]=useState("")
+    const [isLoading, setIsloading]=useState(false)
 
     const router=useRouter();
 
     async function handleSubmit(e: any){
+        
+        setIsloading(true)
+
         e.preventDefault()
 
-        const result= await signIn("credentials", {
-            redirect: false,
-            username, 
+        try {
+            const result:any = await axios.post("/api/auth/signup", {
+            username,
+            email,
             password
-        })
+            });
 
-        if(result?.ok){
-            router.push("/home")
-        }else if(result?.error){
-            setErrorMsg(result.error)
+            if (result.status === 201) {
+                const res = await signIn("credentials", {
+                    redirect: false,
+                    username,
+                    password
+                });
+
+                if (res?.ok) {
+                    router.push("/home");
+                } else if (res?.error) {
+                    setErrorMsg(res.error);
+                }
+            }
+        } catch (error: any) {
+            console.error("Signup failed:", error);
+            setErrorMsg(`${Object.values(error.response?.data?.message)[0]}`);
+            // setErrorMsg(JSON.stringify(error.response?.data?.message));
+        }finally{
+            setIsloading(false)
         }
+
     }
 
 
@@ -83,8 +105,8 @@ export default function page(){
                             id="password" type="password" required />
                             
                             <p className="text-red-500 text-md"> {errorMsg} </p>
-                            <Button type="submit" className="w-full cursor-pointer">
-                                Create Account
+                            <Button type="submit" disabled={isLoading} className="w-full cursor-pointer">
+                                {isLoading? "Please wait Creating..." :  "Create Account"}
                             </Button></div>
                         </div>
                         </form>

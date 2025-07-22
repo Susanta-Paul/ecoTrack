@@ -7,7 +7,7 @@ import {signIn} from "next-auth/react"
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function page(){
+export default function Page(){
 
     const [username, setUsername]=useState("")
     const [password, setPassword]=useState("")

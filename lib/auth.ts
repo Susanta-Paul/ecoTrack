@@ -44,7 +44,7 @@ export const authOptions: NextAuthOptions={
 
                 } catch (error) {
                     console.log(error)
-                    throw new Error("Error in Authorizing User")
+                    throw new Error(`${error}`)
                 }
             }
         })
@@ -54,7 +54,9 @@ export const authOptions: NextAuthOptions={
         async jwt({token, user}) {
 
             if(user){
-                token.user=user.id
+                console.log("JWT Callback - User:", user);
+                token.id=user.id;
+                token.username=user.username;
             }
 
             return token
@@ -64,6 +66,8 @@ export const authOptions: NextAuthOptions={
 
             if(session.user){
                 session.user.id=token.id as string
+                session.user.username = token.username as string;
+
             }
             return session
         }
