@@ -4,7 +4,6 @@ import entryModel from "@/models/entry";
 import userModel from "@/models/user";
 import axios from "axios";
 import { getServerSession } from "next-auth";
-import { ca } from "zod/v4/locales";
 
 
 
@@ -42,7 +41,7 @@ export async function POST(request:Request) {
                     ]
                 },
                 "parameters": {
-                    "energy": categoryData.electricity.amount,
+                    "energy": parseInt(categoryData.electricity.amount),
                     "energy_unit": categoryData.electricity.unit
                 }
             }, 
@@ -56,7 +55,7 @@ export async function POST(request:Request) {
                     "data_version": "^23"
                 },
                 "parameters": {
-                    "money": categoryData.food.amount,
+                    "money": parseInt(categoryData.food.amount),
                     "money_unit": categoryData.food.unit
                 }
             },
@@ -70,7 +69,7 @@ export async function POST(request:Request) {
                     "data_version": "^23"
                 },
                 "parameters": {
-                    "money": categoryData.travel.amount,
+                    "money": parseInt(categoryData.travel.amount),
                     "money_unit": categoryData.travel.unit
                 }
             },
@@ -84,7 +83,7 @@ export async function POST(request:Request) {
                     "data_version": "^23"
                 },
                 "parameters": {
-                    "money": categoryData.misc.amount,
+                    "money": parseInt(categoryData.misc.amount),
                     "money_unit": categoryData.misc.unit
                 }
             }
@@ -115,6 +114,11 @@ export async function POST(request:Request) {
                 {status: 500}
             )
         }
+
+        // return Response.json(
+        //     {success: true, message: total},
+        //     {status: 200}
+        // )
 
         
         const newEntry= await entryModel.create({
