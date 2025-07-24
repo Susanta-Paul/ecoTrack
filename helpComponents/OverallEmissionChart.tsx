@@ -20,6 +20,8 @@ import {
 import { useEffect, useState } from "react"
 import axios from "axios"
 import PieChartComp from "./PieChart"
+import OverBreakdown from "./OverBreakdown"
+import AiSuggestion from "./AiSuggestion"
 
 
 export type CarbonEntry = {
@@ -83,7 +85,7 @@ export default function OverallEmissionChart(){
 
 
     return (
-        <div className="w-full">
+        <div className="w-full pb-20">
             
             <div className="flex flex-col justify-around md:flex-row">
                 <Card className="w-full md:w-[45%] mt-7">
@@ -150,6 +152,11 @@ export default function OverallEmissionChart(){
 
                 <PieChartComp chartData={chartData} />  
             </div> 
+
+            <div className="flex flex-col justify-around md:flex-row">
+                <OverBreakdown chartData={chartData} />
+                <AiSuggestion total={total} />
+            </div>
 
         </div>
     )
